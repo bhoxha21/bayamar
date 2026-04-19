@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bayamar Adventures – Private Boat Tours, Himara Albania</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --cream:#f4f1ea;
+    --white:#ffffff;
+    --off-white:#f8f9fb;
+    --pearl:#f2f5f8;
+    --blue-100:#ddeaf7;
+    --blue-200:#b8d4ef;
+    --blue-400:#5fa3d8;
+    --blue-500:#2d7fc4;
+    --blue-600:#1a5e9a;
+    --blue-800:#144a8a;
+    --navy:#0e356e;
+    --text-dark:#0f172a;
+    --text-mid:#334155;
+    --text-muted:#64748b;
+    --gold:#c9a84c;
+    --gold-light:#ffedb3;
+    --radius-sm:8px;
+    --radius-md:16px;
+    --radius-lg:24px;
+    --radius-xl:32px;
+    --shadow-soft:0 10px 40px rgba(8,31,63,0.06);
+    --shadow-md:0 20px 60px rgba(8,31,63,0.1);
+    --transition-apple:1s cubic-bezier(0.22, 1, 0.36, 1);
+    --font-display:'Cormorant Garamond',Georgia,serif;
+    --font-body:'DM Sans',system-ui,sans-serif;
+  }
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{
+    font-family:var(--font-body);
+    background:var(--cream);
+    color:var(--text-dark);
+    overflow-x:hidden;
+    line-height:1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal{opacity:0;transform:translateY(15px);transition:opacity 0.4s var(--transition-apple), transform 0.4s var(--transition-apple)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  
+  /* ── LOADER ── */
+  #loader-overlay{
+    position:fixed;inset:0;background:var(--cream);z-index:10000;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    transition:opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+  }
+  .loader-content{text-align:center;color:var(--navy)}
+  .loader-logo{font-family:var(--font-display);font-size:2.8rem;margin-bottom:1rem;color:var(--navy)}
+  .loader-logo span{color:var(--blue-400)}
+  .loader-line{width:180px;height:2px;background:var(--blue-100);margin:1.5rem auto;position:relative;overflow:hidden;border-radius:10px}
+  .loader-line-inner{
+    position:absolute;top:0;left:0;height:100%;background:var(--blue-400);
+    width:40%;animation:loader-slide 2.5s infinite ease-in-out;
+  }
+  @keyframes loader-slide{
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
+  }
+  body.loaded #loader-overlay{opacity:0;visibility:hidden}
+  .delay-1{transition-delay:0.1s}
+  .delay-2{transition-delay:0.2s}
+  .delay-3{transition-delay:0.3s}
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: var(--white);
+    color: var(--blue-500);
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 1.2rem 2.8rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.4s var(--transition-apple);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+    animation: float 3s ease-in-out infinite;
+  }
+  .btn-primary:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    background: var(--white);
+    color: var(--blue-600);
+    animation-play-state: paused;
+  }
+
+  /* ── NAV ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    padding:0 2rem;
+    height:84px;
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(244, 241, 234, 0.9);
+    backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+    border-bottom:1px solid rgba(184,212,239,0.25);
+    transition:all 0.4s ease;
+  }
+  .nav-logo-container{display:flex;align-items:center;gap:14px;text-decoration:none}
+  .nav-logo-img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--blue-100)}
+  .nav-logo-text{
+    font-family:var(--font-display);
+    font-size:1.7rem;font-weight:600;color:var(--navy);letter-spacing:0.01em;
+  }
+  .nav-logo-text span{color:var(--blue-400)}
+  .nav-links{display:flex;gap:3rem;list-style:none}
+  .nav-links a{
+    font-size:0.85rem;font-weight:700;letter-spacing:0.12em;
+    text-transform:uppercase;color:var(--text-mid);text-decoration:none;transition:color 0.3s;
+  }
+  .nav-links a:hover{color:var(--blue-500)}
+  .nav-cta{
+    background:var(--blue-400);
+    color:var(--white)!important;
+    padding:0.8rem 1.8rem;
+    border-radius:100px;
+    font-size:0.85rem!important;
+    font-weight:700!important;
+    text-decoration:none;
+    transition:var(--transition-apple);
+  }
+  .nav-cta:hover{transform:scale(1.05); background:var(--blue-500)}
+  @media(max-width:1024px){
+    .nav-links, .nav-cta{display:none} 
+    nav{
+      justify-content:center;
+      height:64px;
+      top:1rem;
+      left:1rem;
+      right:1rem;
+      width:calc(100% - 2rem);
+      border-radius:100px;
+      border:1px solid rgba(184,212,239,0.3);
+      box-shadow:0 10px 30px rgba(8,31,63,0.12);
+    }
+  }
+
+  /* ── HERO (HIGH CONTRAST) ── */
+  .hero{
+    height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:0 1.5rem;
+    position:relative;overflow:hidden;
+    background:var(--navy);
+  }
+  .hero-img-bg{
+    position:absolute;inset:0;
+    background:url('new hero.jpg') center/cover no-repeat;
+    opacity:0.85; /* Better contrast base */
+    z-index:1;
+  }
+  .hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to bottom, rgba(8,31,63,0.5) 0%, rgba(8,31,63,0.7) 100%);
+    z-index:2;
+  }
+  .hero-content{position:relative;z-index:10;max-width:900px}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:0.8rem;
+    background:rgba(255,255,255,0.1);color:var(--white);
+    font-size:0.8rem;font-weight:700;letter-spacing:0.12em;
+    text-transform:uppercase;padding:0.8rem 2rem;
+    border-radius:100px;margin-bottom:2rem;
+    border:1px solid rgba(255,255,255,0.3);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  }
+  .hero-badge i{color:var(--blue-200);font-size:1rem}
+  .hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(3rem, 10vw, 6.5rem);
+    font-weight:300;line-height:0.95;
+    color:var(--white); 
+    margin-bottom:1.2rem;letter-spacing:-0.03em;
+    text-shadow: 0 4px 60px rgba(0,0,0,0.4);
+  }
+  .hero h1 em{font-style:italic;color:var(--blue-200);font-weight:400}
+  .hero-sub{
+    font-size:clamp(1.1rem, 2.5vw, 1.5rem);
+    color:rgba(255,255,255,0.9);max-width:680px;
+    margin:0 auto 3.5rem;line-height:1.6;font-weight:300;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  /* ── SECTIONS ── */
+  section{padding:12rem 1.5rem}
+  @media(max-width:768px){section{padding:8rem 1.5rem}}
+  .container{max-width:1250px;margin:0 auto}
+  .section-label{
+    font-size:0.85rem;font-weight:700;letter-spacing:0.3em;
+    text-transform:uppercase;color:var(--blue-400);margin-bottom:1.5rem;display:block;
+  }
+  .section-title{
+    font-family:var(--font-display);
+    font-size:clamp(2.8rem, 6vw, 4.5rem);
+    font-weight:300;color:var(--navy);line-height:1.05;margin-bottom:2.2rem;
+  }
+  .section-title em{font-style:italic;color:var(--blue-500)}
+
+  .spacer-lg { height: 10rem; background: var(--cream); }
+  @media(max-width:768px){.spacer-lg { height: 6rem; }}
+
+  /* ── TOURS (PROFESSIONAL FORMATTING) ── */
+  .tours-section{background:var(--cream)}
+  .tours-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));gap:3rem;margin-top:5rem}
+  @media(max-width:500px){.tours-grid{grid-template-columns:1fr}}
+  .tour-card{
+    background:var(--white);border-radius:var(--radius-xl);overflow:hidden;
+    border:1px solid rgba(184,212,239,0.2);transition:var(--transition-apple);
+    height:100%;display:flex;flex-direction:column;box-shadow:var(--shadow-soft);
+  }
+  .tour-card:hover{transform:translateY(-15px);box-shadow:var(--shadow-md)}
+  .tour-img-container{height:280px;overflow:hidden;position:relative}
+  .tour-img{width:100%;height:100%;object-fit:cover;transition:transform 2s var(--transition-apple)}
+  .tour-card:hover .tour-img{transform:scale(1.15)}
+  .tour-price-tag{
+    position:absolute;top:1.5rem;right:1.5rem;
+    background:var(--navy);color:var(--white);
+    padding:0.7rem 1.4rem;border-radius:100px;
+    font-weight:700;font-size:1rem;box-shadow:var(--shadow-md);
+  }
+  .tour-card-content{padding:3rem;flex-grow:1;display:flex;flex-direction:column}
+  .tour-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+  .tour-route-badge{font-size:0.75rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--blue-400)}
+  .tour-card h3{font-family:var(--font-display);font-size:2.2rem;color:var(--navy);margin-bottom:0.8rem}
+  .tour-duration{font-size:0.9rem;color:var(--text-muted);font-weight:600;margin-bottom:2rem;display:flex;align-items:center;gap:0.6rem}
+  .tour-itinerary-header{font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:var(--navy);margin-bottom:1.2rem;display:block;border-bottom:2px solid var(--blue-100);padding-bottom:0.5rem}
+  .tour-spots-list{list-style:none;margin-bottom:3rem;display:grid;grid-template-columns:1fr;gap:1.2rem}
+  .tour-spot{font-size:0.9rem;line-height:1.5;display:flex;gap:1rem}
+  .tour-spot-point{width:8px;height:8px;background:var(--blue-400);border-radius:50%;flex-shrink:0;margin-top:0.5rem}
+  .tour-spot-text strong{color:var(--navy);display:block;margin-bottom:0.1rem}
+  .tour-spot-text span{color:var(--text-mid)}
+  .btn-book-tour{
+    width:100%;text-align:center;padding:1.4rem;
+    background:var(--blue-100);color:var(--blue-600);
+    text-decoration:none;border-radius:var(--radius-md);
+    font-weight:800;font-size:0.95rem;transition:0.3s ease;margin-top:auto;
+  }
+  .btn-book-tour:hover{background:var(--blue-400);color:var(--white)}
+
+  /* ── INTERACTIVE GALLERY (MANUAL SLIDER) ── */
+  .gallery-section{background:var(--cream);position:relative;overflow:hidden}
+  .gallery-slider-container{position:relative;width:100%;max-width:1400px;margin:5rem auto 0;padding:0 1.5rem}
+  .gallery-window{overflow:hidden;border-radius:var(--radius-xl)}
+  .gallery-track{display:flex;gap:1.5rem;transition:transform 0.8s var(--transition-apple);width:max-content}
+  .gallery-item{
+    width:380px;height:480px;flex-shrink:0;border-radius:var(--radius-lg);
+    overflow:hidden;cursor:zoom-in;box-shadow:var(--shadow-md);
+    transition:transform 0.5s var(--transition-apple);
+  }
+  .gallery-item:hover{transform:scale(1.02)}
+  @media(max-width:768px){.gallery-item{width:280px;height:380px}}
+  .gallery-item img{width:100%;height:100%;object-fit:cover}
+  .gallery-controls{
+    display:flex;justify-content:center;gap:1.5rem;margin-top:3.5rem;
+  }
+  .gal-btn{
+    width:64px;height:64px;border-radius:50%;background:var(--white);
+    border:1px solid var(--blue-200);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:var(--transition-apple);color:var(--navy);font-size:1.2rem;
+    box-shadow:var(--shadow-sm);
+  }
+  .gal-btn:hover{background:var(--blue-100);transform:scale(1.1);border-color:var(--blue-400)}
+  .gal-btn:disabled{opacity:0.3;cursor:not-allowed}
+
+  /* ── REVIEWS (CONSTANT SMOOTH MOTION) ── */
+  .reviews-section{background:var(--cream);overflow:hidden;padding-bottom:12rem}
+  .carousel-wrapper{margin:4rem 0;position:relative;overflow-x:auto;scroll-behavior:smooth;-ms-overflow-style:none;scrollbar-width:none;scroll-snap-type:x mandatory}
+  .carousel-track{display:flex;gap:2rem;width:max-content;animation:marquee 60s linear infinite}
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .carousel-track.paused{animation-play-state:paused}
+  .rev-card{
+    width:400px;background:var(--white);border-radius:var(--radius-xl);
+    padding:3rem;border:1px solid rgba(184,212,239,0.25);flex-shrink:0;box-shadow:var(--shadow-soft);
+    scroll-snap-align:center;
+  }
+  @media(max-width:500px){.rev-card{width:88vw;padding:2rem}}
+  .rev-head{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.8rem}
+  .rev-avatar{width:60px;height:60px;border-radius:50%;border:3px solid var(--blue-100);object-fit:cover}
+  .rev-author h4{font-size:1.1rem;color:var(--navy);font-weight:700}
+  .rev-author span{font-size:0.8rem;color:var(--text-muted)}
+  .rev-body{font-style:italic;font-size:1rem;color:var(--text-mid);line-height:1.8}
+
+  .reviews-controls{display:flex;justify-content:center;align-items:center;gap:3rem;margin:1rem 0 3rem}
+  @media(max-width:768px){.reviews-controls{gap:1.5rem;margin:0.5rem 0 2rem}}
+  .rev-platform-label{font-size:0.8rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:var(--blue-400);text-align:center}
+  @media(max-width:768px){.rev-platform-label{font-size:0.7rem;letter-spacing:0.1em}}
+  .rev-nav-btn{
+    width:48px;height:48px;border-radius:50%;background:var(--white);
+    border:1px solid var(--blue-100);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:var(--transition-apple);color:var(--navy);box-shadow:var(--shadow-soft);
+  }
+  .rev-nav-btn:hover{background:var(--blue-400);color:var(--white);border-color:var(--blue-400);transform:scale(1.1)}
+
+  /* ── LIGHTBOX ── */
+  #lightbox{
+    position:fixed;inset:0;background:rgba(2, 11, 24, 0.95);
+    z-index:9999;display:none;align-items:center;justify-content:center;
+    padding:2rem;cursor:zoom-out;backdrop-filter:blur(10px);
+  }
+  #lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 0 100px rgba(0,0,0,0.5)}
+  .lightbox-close{position:absolute;top:2rem;right:2rem;color:white;font-size:2.5rem;cursor:pointer}
+
+  /* ── FAQ ── */
+  .faq-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:6rem}
+  @media(max-width:992px){.faq-layout{grid-template-columns:1fr;gap:4rem}}
+  .faq-item{background:var(--white);border-radius:var(--radius-lg);margin-bottom:1.5rem;overflow:hidden;border:1px solid transparent;transition:all 0.4s}
+  .faq-item.open{border-color:var(--blue-200);box-shadow:var(--shadow-md)}
+  .faq-q{padding:2rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;color:var(--navy);font-size:1.15rem}
+  .faq-a{max-height:0;padding:0 2rem;overflow:hidden;transition:all 0.5s var(--transition-apple);font-size:1rem;color:var(--text-mid);line-height:1.8}
+  .faq-item.open .faq-a{max-height:400px;padding-bottom:2rem}
+  .faq-arrow{transition:transform 0.4s;color:var(--blue-400)}
+  .faq-item.open .faq-arrow{transform:rotate(180deg)}
+
+  /* ── FOOTER ── */
+  footer{background:var(--cream);padding:8rem 2rem;color:var(--text-dark);position:relative;border-top:1px solid var(--blue-100)}
+  @media(max-width:768px){footer{padding:4rem 1.5rem}}
+  .footer-inner{max-width:1250px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:4rem}
+  @media(max-width:1024px){.footer-inner{grid-template-columns:1fr;gap:3rem}}
+  .footer-logo{font-family:var(--font-display);font-size:2.8rem;display:block;margin-bottom:1.5rem;text-decoration:none;color:var(--navy)}
+  .footer-logo span{color:var(--blue-400)}
+  .footer-links{display:flex;flex-direction:column;gap:1.2rem;list-style:none}
+  .footer-links a{color:var(--text-mid);text-decoration:none;font-weight:600;transition:0.3s}
+  .footer-links a:hover{color:var(--blue-500);transform:translateX(5px)}
+  .footer-map-container{height:420px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-soft);border:1px solid var(--blue-100); grid-column: span 1;}
+  @media(max-width:1024px){.footer-map-container{height:350px}}
+  .footer-map-container iframe{width:100%;height:100%;border:0}
+  .wa-float{
+    position:fixed;bottom:2.5rem;right:2.5rem;z-index:1100;
+    background:#25D366;width:72px;height:72px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 15px 40px rgba(37,211,102,0.4);transition:transform 0.3s;
+  }
+  .wa-float:hover{transform:scale(1.15)}
+
+  .vessel-image-frame {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--blue-100);
+    box-shadow: var(--shadow-md);
+    max-width: 85%;
+    margin: 0 auto;
+    transition: var(--transition-apple);
+    position: relative;
+    text-align: center;
+  }
+  .vessel-image-frame:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(14,53,110,0.15);
+  }
+  .vessel-image-frame::after {
+    content: "⚓ Bayamar Vessel";
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--blue-400);
+    opacity: 0.6;
+  }
+  .vessel-image-frame img {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  .vessel-image-frame { cursor: pointer; }
+
+  .vessel-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  @media (max-width: 992px) {
+    .vessel-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  /* ── BOOKING MODAL ── */
+  #booking-modal{
+    position:fixed;inset:0;background:rgba(14,53,110,0.6);
+    z-index:9999;display:none;align-items:center;justify-content:center;
+    padding:1.5rem;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  }
+  .modal-card{
+    background:var(--cream);width:100%;max-width:480px;
+    border-radius:var(--radius-xl);padding:3.5rem;
+    box-shadow:var(--shadow-md);position:relative;
+    border:1px solid rgba(184,212,239,0.3);
+  }
+  .modal-close{position:absolute;top:1.5rem;right:1.5rem;cursor:pointer;font-size:1.5rem;color:var(--navy);opacity:0.5;transition:0.3s}
+  .modal-close:hover{opacity:1}
+  .modal-title{font-family:var(--font-display);font-size:2.4rem;color:var(--navy);margin-bottom:0.5rem;line-height:1.1}
+  .modal-subtitle{font-size:0.9rem;color:var(--text-muted);margin-bottom:2.5rem}
+  .form-group{margin-bottom:1.8rem}
+  .form-label{display:block;font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:var(--navy);margin-bottom:0.8rem}
+  .form-input{
+    width:100%;padding:1.2rem 1.5rem;border-radius:var(--radius-md);
+    border:1px solid rgba(184,212,239,0.5);background:var(--white);
+    font-family:inherit;font-size:1rem;color:var(--navy);transition:all 0.3s;
+  }
+  .form-input:focus{outline:none;border-color:var(--blue-400);box-shadow:0 0 0 4px rgba(95,163,216,0.1)}
+  .btn-submit-booking{
+    width:100%;padding:1.4rem;background:var(--navy);color:var(--white);
+    border:none;border-radius:var(--radius-md);font-weight:800;font-size:1rem;
+    cursor:pointer;transition:var(--transition-apple);margin-top:1rem;
+    display:flex;align-items:center;justify-content:center;gap:0.8rem;
+  }
+  .btn-submit-booking:hover{background:var(--blue-600);transform:translateY(-3px);box-shadow:0 10px 30px rgba(14,53,110,0.25)}
+</style>
+</head>
+<body>
+
+<div id="loader-overlay">
+  <div class="loader-content">
+    <div class="loader-logo">Bayamar <span>Adventures</span></div>
+    <p style="font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.6">Exploring the Ionian sea</p>
+    <div class="loader-line">
+      <div class="loader-line-inner"></div>
+    </div>
+  </div>
+</div>
+
+<nav id="main-nav">
+  <a href="#" class="nav-logo-container">
+    <img src="upclose boat logo pic.jpg" class="nav-logo-img" alt="Bayamar">
+    <span class="nav-logo-text">Bayamar <span>Adventures</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#tours">Expeditions</a></li>
+    <li><a href="#vessel">The Vessel</a></li>
+    <li><a href="#gallery">Moments</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#" class="nav-cta wa-link">Book Now</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-img-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge reveal">
+        <span style="color:var(--blue-200)">⚓</span> Epic Private Adventures 
+        <span style="margin:0 0.5rem; opacity:0.3">|</span> Groups up to 6
+    </div>
+    <h1 class="reveal delay-1">Your <em>Private Escape</em><br>on the Ionian Sea</h1>
+    <p class="hero-sub reveal delay-2">Unforgettable boat trips into the turquoise wild. Dive into hidden caves and sun-drenched bays with the fun-loving Bayamar Captain. Perfect for groups of up to 6!</p>
+    <a href="#tours" class="btn-primary reveal delay-3">Explore Our Routes ⚓</a>
+  </div>
+</section>
+
+<section id="about" class="section-padding" style="padding-top: 10rem; padding-bottom: 4rem;">
+  <div class="container">
+    <div class="reveal" style="max-width:800px; margin:0 auto; text-align:center;">
+      <span class="section-label">About</span>
+      <h2 class="section-title">Explore the <em>Albanian Riviera</em></h2>
+    </div>
+    <div class="reveal delay-1" style="max-width:900px; margin:2rem auto 0; color:var(--text-mid); font-size:1.1rem; line-height:1.8; text-align:center;">
+      <p style="margin-bottom:1.5rem;">Explore the breathtaking Albanian Riviera with Bayamar Adventures, based in Himara. We specialize exclusively in private boat tours, offering a more personalized and intimate experience tailored entirely to your preferences. Discover hidden beaches, crystal-clear waters, and charming coastal bays at your own pace.</p>
+      <p style="margin-bottom:1.5rem;">Each journey is led by a highly experienced captain with extensive knowledge of the coastline, ensuring not only your safety but also insider access to the most beautiful and secluded spots along the Ionian Sea. Whether you’re seeking relaxation, swimming in untouched bays, or a touch of adventure, every tour is designed to create unforgettable moments.</p>
+      <p>With flexibility, comfort, and attention to detail at the core of what we do, Bayamar Adventures promises a unique and scenic escape along one of the Mediterranean’s most stunning coastlines.</p>
+    </div>
+  </div>
+</section>
+
+<section id="tours" class="tours-section">
+  <div class="container">
+    <div style="text-align:center; max-width:800px; margin:0 auto">
+        <span class="section-label reveal">Our Adventures</span>
+        <h2 class="section-title reveal delay-1">Premium <em>Private Routes</em></h2>
+        <p class="reveal delay-2" style="color:var(--text-mid); font-weight:500">Departing from Himara Marina. Strictly private group experiences.</p>
+    </div>
+    <div class="tours-grid" id="tours-grid">
+      <!-- Generated by Settings -->
+    </div>
+  </div>
+</section>
+
+<section id="vessel" class="section-padding">
+  <div class="container vessel-grid">
+    <div class="reveal">
+      <span class="section-label">Adventure Ready</span>
+      <h2 class="section-title">The Vessel & Your <em>Legendary Captain</em></h2>
+      <p style="color:var(--text-mid); margin-bottom:3rem; font-size:1.1rem">The Bayamar Captain knows every secret cave and hidden beach on the coast. Our boat is your perfect base for a day of sun, swimming, and exploring, equipped with great snorkeling gear and top safety systems.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:2rem">
+          <div style="background:var(--pearl); padding:2rem; border-radius:var(--radius-md)">
+              <div style="font-size:1.8rem; margin-bottom:1rem">🌊</div>
+              <h4 style="color:var(--navy); margin-bottom:0.5rem">Pure Fun & Comfort</h4>
+              <p style="font-size:0.85rem; color:var(--text-muted)">Great vibes, plenty of space, and always ready for the next bay.</p>
+          </div>
+          <div style="background:var(--pearl); padding:2rem; border-radius:var(--radius-md)">
+              <div style="font-size:1.8rem; margin-bottom:1rem">🧭</div>
+              <h4 style="color:var(--navy); margin-bottom:0.5rem">Expert Navigation</h4>
+              <p style="font-size:0.85rem; color:var(--text-muted)">The Bayamar Captain leads with safety and local stories.</p>
+          </div>
+      </div>
+    </div>
+    <div class="reveal delay-1">
+        <div class="vessel-image-frame" onclick="openLightbox('this pic.JPEG')">
+          <img src="this pic.JPEG" alt="Bayamar Boat">
+        </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="section-padding">
+  <div class="container vessel-grid" style="align-items: center;">
+    <div class="reveal">
+      <span class="section-label">Experience</span>
+      <h2 class="section-title">Why Choose <em>Bayamar?</em></h2>
+      <ul style="list-style:none; padding:0; margin-top:2rem;">
+        <li style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+            <div style="width:12px; height:12px; background:var(--blue-400); border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:1.15rem; color:var(--navy); font-weight:600;">Private tours only (no crowds)</span>
+        </li>
+        <li style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+            <div style="width:12px; height:12px; background:var(--blue-400); border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:1.15rem; color:var(--navy); font-weight:600;">Flexible stops</span>
+        </li>
+        <li style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+            <div style="width:12px; height:12px; background:var(--blue-400); border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:1.15rem; color:var(--navy); font-weight:600;">Local captain & guide</span>
+        </li>
+        <li style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
+            <div style="width:12px; height:12px; background:var(--blue-400); border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:1.15rem; color:var(--navy); font-weight:600;">Hidden spots you won’t find alone</span>
+        </li>
+        <li style="display:flex; align-items:center; gap:1rem;">
+            <div style="width:12px; height:12px; background:var(--blue-400); border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:1.15rem; color:var(--navy); font-weight:600;">Max 6 people (premium experience)</span>
+        </li>
+      </ul>
+    </div>
+    <div class="reveal delay-1">
+        <img src="client8.jpg" style="width:100%; height:450px; object-fit:cover; border-radius:var(--radius-xl); box-shadow:var(--shadow-md)" alt="Why Choose Us">
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="gallery-section section-padding">
+  <div class="container" style="text-align:center">
+    <span class="section-label reveal">The Gallery</span>
+    <h2 class="section-title reveal delay-1">Recent <em>Guest Moments</em></h2>
+    <p class="reveal delay-2" style="color:var(--text-muted)">Click to expand any moment into full view.</p>
+  </div>
+
+  <div class="gallery-slider-container reveal delay-2">
+    <div class="gallery-window">
+      <div class="gallery-track" id="gallery-track">
+        <!-- Injected by script -->
+      </div>
+    </div>
+    <div class="gallery-controls">
+      <button class="gal-btn" onclick="slideGallery(-1)" id="prevBtn" disabled>←</button>
+      <button class="gal-btn" onclick="slideGallery(1)" id="nextBtn">→</button>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="reviews-section">
+  <div class="container" style="text-align:center">
+    <span class="section-label reveal">Social Proof</span>
+    <h2 class="section-title reveal delay-1">Experience <em>Unmatched Service</em></h2>
+  </div>
+
+  <div class="carousel-wrapper" id="g-wrapper">
+    <div class="carousel-track" id="google-carousel"></div>
+  </div>
+  
+  <div class="reviews-controls reveal">
+    <button class="rev-nav-btn" onclick="slideReviews('g-wrapper', -1)">←</button>
+    <span class="rev-platform-label">Google Gallery</span>
+    <button class="rev-nav-btn" onclick="slideReviews('g-wrapper', 1)">→</button>
+  </div>
+
+  <div class="carousel-wrapper" id="t-wrapper">
+    <div class="carousel-track" id="tripadvisor-carousel" style="animation-direction: reverse; animation-duration: 75s"></div>
+  </div>
+
+  <div class="reviews-controls reveal">
+    <button class="rev-nav-btn" onclick="slideReviews('t-wrapper', -1)">←</button>
+    <span class="rev-platform-label">TripAdvisor Collection</span>
+    <button class="rev-nav-btn" onclick="slideReviews('t-wrapper', 1)">→</button>
+  </div>
+</section>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img src="" id="lightbox-img" alt="Enlarged moment">
+</div>
+
+<section id="faq" class="section-padding">
+  <div class="container faq-layout">
+    <div class="reveal">
+        <span class="section-label">Travel Desk</span>
+        <h2 class="section-title">Common <em>Queries</em></h2>
+        <p style="color:var(--text-muted); margin-bottom:2rem">Private bookings for up to 5 guests. Ask us about our special 6th guest arrangement.</p>
+        <a href="#" class="btn-primary wa-link" style="padding:1rem 2rem; font-size:0.85rem">Message via WhatsApp</a>
+    </div>
+    <div class="reveal delay-1">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How private is the tour? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Completely. We never combine separate groups. The entire boat and Captain are reserved exclusively for you and your chosen companions.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Payment and Booking? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Bookings are handled efficiently via WhatsApp to ensure clear communication and date availability. Simply choose your tour and send us your details!</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you provide drinks? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes, a cooler with fresh water is provided. You are also welcome to bring your own favorite drinks and snacks to enjoy on board.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is there a toilet on board? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">To maintain the agility needed to explore small sea caves, our boat does not have a toilet. We recommend using the marina facilities before we depart.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What if the weather is bad? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">If the captain determines that sea conditions are unsafe, we will first attempt to reschedule. If that's not possible, a full refund will be provided.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can we play our own music? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Yes! Our boat is equipped with a high-quality Bluetooth sound system so you can set the perfect mood for your private escape.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ready-to-sail" class="section-padding" style="background: linear-gradient(rgba(14, 53, 110, 0.6), rgba(14, 53, 110, 0.6)), url('new hero.jpg') center/cover no-repeat; color:var(--white); text-align:center; position: relative; overflow: hidden;">
+  <div class="container reveal">
+    <h2 class="section-title" style="color:var(--white); margin-top: 2rem; font-family:var(--font-display); font-weight:300; letter-spacing:-0.02em; text-shadow: 0 4px 30px rgba(0,0,0,0.3)">Let’s explore the best of the<br><em style="color:white; font-style:italic">Albanian Riviera</em> together 🌊</h2>
+    <a href="#" class="btn-primary wa-link" style="background:var(--white); color:var(--blue-500); transform:scale(1.1); font-weight: 900; margin-top: 2.5rem; text-transform: uppercase;">Book Your Tour Now maximum 6 people</a>
+  </div>
+</section>
+
+<div class="spacer-lg"></div>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-brand">
+        <a href="#" class="footer-logo">Bayamar <span>Adventures</span></a>
+        <p style="color:var(--text-mid); font-weight:400; font-size:1rem; line-height:1.8; margin-bottom: 2rem">The premier private boat boutique in Himara, Albania. Crafting exclusive maritime escapes with the legendary Bayamar Captain.</p>
+        
+        <h4 style="color:var(--navy); margin-bottom:1rem; font-size:1.05rem; text-transform: uppercase; letter-spacing: 0.1em">Talk to us</h4>
+        <p style="color:var(--blue-500); font-weight:800; font-size:1.5rem; margin-bottom:0.4rem">+355 69 350 5540</p>
+        <p style="color:var(--text-muted); font-size:0.9rem; font-weight: 500">Himara Marina, Albania</p>
+    </div>
+
+    <div class="footer-map-container">
+        <iframe 
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtvctBXc_MNEgRKrx2vZRfoiFxvux1uLM&q=place_id:ChIJH3BlyZ9Gr6ERNG4ByNt9GdU" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="wa-float wa-link" aria-label="WhatsApp Booking">
+    <svg style="width:36px;height:36px" fill="white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.539 2.016 2.041-.54c1.017.477 1.962.808 3.227.808h.001c3.181 0 5.766-2.586 5.767-5.766 0-3.18-2.585-5.771-5.769-5.771zm3.371 8.203c-.144.405-.833.748-1.159.796-.327.049-.65.063-1.053-.069-.245-.08-.548-.191-.925-.348-1.607-.671-2.635-2.302-2.715-2.407-.08-.105-.653-.871-.653-1.659s.41-.1.554-.1.32.001.459.001c.099 0 .232-.036.362.277.13.314.457 1.111.492 1.186.035.075.058.163.008.262s-.073.111-.144.191c-.072.08-.15.179-.214.243-.072.072-.148.151-.063.296.085.145.378.623.81 1.008.558.497 1.03.652 1.175.724.145.072.23.06.314-.038.085-.098.362-.422.46-.565.099-.144.196-.121.332-.072s.863.407 1.012.481c.149.074.249.111.285.174.037.062.037.362-.107.767zM12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10z"/></svg>
+</a>
+
+<div id="booking-modal">
+  <div class="modal-card">
+    <div class="modal-close" onclick="closeBookingModal()">&times;</div>
+    <h2 class="modal-title" id="modal-tour-name">Book Your Tour</h2>
+    <p class="modal-subtitle">Private and personalized experience</p>
+    
+    <div class="form-group">
+      <label class="form-label">Your Full Name</label>
+      <input type="text" id="bk-name" class="form-input" placeholder="e.g. John Doe">
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Group Size (Max 6)</label>
+      <input type="number" id="bk-size" class="form-input" value="1" min="1" max="6">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Preferred Date</label>
+      <input type="date" id="bk-date" class="form-input">
+    </div>
+    
+    <button class="btn-submit-booking" onclick="submitBooking()">
+      Continue to WhatsApp ⚓
+    </button>
+  </div>
+</div>
+
+<script>
+  // --- DATABASE ---
+  const SETTINGS = {
+    whatsapp: "+355693505540",
+    whatsappMsg: "Hello! I'd like to check availability for a private boat tour with the Bayamar Captain.",
+    tours: [
+      { name: "Pirate's Cave Boat Tour", duration: "2.5 hours", img: "pirate our.jpg", badge: "Adventure Route", description: "Explore the wild and adventurous side of the Albanian Riviera. This tour takes you to hidden caves, secret beaches, and untouched nature only accessible by boat.", cta: "Book this tour", why: "Ideal for adventure lovers who want to explore caves, swim in unique spots, and experience something different.", spots: [
+          ["Livadhi Beach", "Turquoise waters and impressive cliffs"],
+          ["Aquarium Beach", "Perfect for snorkeling with crystal-clear water"],
+          ["Jala Beach", "Calm bay with vibrant seabed"],
+          ["Celestina Beach", "Hidden paradise accessible only by boat"],
+          ["Pigeons Cave", "Unique cave where pigeons nest"],
+          ["Gjipe Bay", "Wild beach at the canyon entrance"],
+          ["Monastery Cave", "Peaceful cave near ancient cliffs"],
+          ["Pirate's Cave", "Legendary cave, perfect for exploring and diving"]
+      ]},
+      { name: "Porto Palermo Coastline Tour ⚓", duration: "2.5 hours", img: "porto palermo.PNG", badge: "Scenic & Historic", description: "Discover one of the most scenic routes along the Albanian Riviera with this private boat tour starting from Himara Marina. A perfect mix of exploration, swimming, and breathtaking coastal views.", cta: "Book This Tour", why: "Perfect for those who want a short but complete experience of the coastline, combining history, nature, and relaxation.", spots: [
+          ["Filikuri Beach", "Hidden cove with crystal-clear waters and dramatic cliffs"],
+          ["Llamani Beach", "Scenic pebble beach, ideal for swimming and relaxing"],
+          ["Old Submarine Tunnel", "A Cold War tunnel carved into the cliffs"],
+          ["Lambjano Beach", "Quiet and untouched turquoise waters"],
+          ["Porto Palermo Castle", "View the historic Ali Pasha fortress from the sea"],
+          ["6 Hidden Beaches", "Remote, boat-only spots perfect for swimming and photos"]
+      ]},
+      { name: "Kroreza Bay Boat Tour", duration: "5-6 hours", img: "KROREZ.jpeg", badge: "Full Day Escape", description: "A longer, more complete journey along the Riviera, combining all the highlights with exclusive access to some of the most pristine and remote beaches.", cta: "Book This Tour", why: "Perfect for a full-day escape, giving you time to truly relax, explore, and enjoy every stop without rushing.", spots: [
+          ["Filikuri Beach", "Hidden gem with crystal waters"],
+          ["Llamani Beach", "Relaxing and scenic"],
+          ["Old Submarine Tunnel", "Historical Cold War site"],
+          ["Lambjano Beach", "Peaceful turquoise bay"],
+          ["Porto Palermo Castle", "Iconic coastal landmark"],
+          ["6 Hidden Beaches", "Remote swimming spots"],
+          ["Kroreza Beach", "One of the most beautiful beaches in the south"],
+          ["Kakome Bay", "Secluded bay with deep blue waters"]
+      ]},
+      { name: "Sunset Tour", duration: "2.5 hours", img: "sunset.jpg", badge: "Evening Magic", description: "A relaxing evening experience along the Albanian Riviera, perfect for enjoying golden hour, calm waters, and unforgettable sunset views from the sea.", cta: "Book This Tour", why: "Perfect for couples or anyone looking for a peaceful, romantic escape. Enjoy the Riviera in its most magical moment — when the sun sets and everything turns gold.", spots: [
+          ["Livadhi Beach", "Golden reflections over turquoise waters"],
+          ["Aquarium Beach", "Swim in crystal-clear water at sunset"],
+          ["Jala Beach", "Peaceful bay with warm evening colors"],
+          ["Pigeons Cave", "Calm stop in a unique cave setting"],
+          ["Hidden sunset spots", "Carefully chosen for the best view 🌇"]
+      ]},
+      { name: "Grama Bay Boat Tour", duration: "Flexible", img: "grama tour.jpg", badge: "Your Itinerary", description: "Create your own itinerary. Choose the duration, stops, and experience you want — we’ll take care of the rest.", cta: "Customize Your Tour", why: "Perfect for: Special occasions, Small Groups, Full-day adventures.", spots: []}
+    ],
+    reviews: [
+      { a: "Agon Bytyqi", t: "Wonderful cleanliness, perfect guide. Best in Himare!", s: "Google", img: "client1.jpg" },
+      { a: "Nimela Hoxhaj", t: "Peaceful escape. Captain knew all best hidden spots.", s: "Google", img: "client2.jpg" },
+      { a: "Ermal Allko", t: "Professional, friendly crew, stunning spots. Safe and comfortable.", s: "Google", img: "client3.jpg" },
+      { a: "Maria Alt", t: "Wonderful private tour to Grama Bay. Highly recommended.", s: "Google", img: "client4.jpg" },
+      { a: "Xhoi Topi", t: "Pure magic. Aquarium Bay stole the show. Calm and beautiful.", s: "Google", img: "client10.jpg" },
+      { a: "Juliana S", t: "Best tour for 6 hours. Daniel was kind and funny.", s: "TripAdvisor", img: "client6.jpg" },
+      { a: "Axelle R", t: "Breathtaking landscapes. Daniel took great care of us.", s: "TripAdvisor", img: "client7.jpg" },
+      { a: "Linds M", t: "Excellent skipper, tailored trip to our wants. Highly recommend!", s: "TripAdvisor", img: "client8.jpg" }
+    ],
+    gallery: ["client1.jpg", "client2.jpg", "client3.jpg", "client4.jpg", "client5.jpg", "client6.jpg", "client7.jpg", "client8.jpg", "client9.jpg", "client10.jpg", "client11.jpg", "client12.jpg"]
+  };
+
+  // --- LOGIC ---
+  let selectedTour = "";
+  
+  function init() {
+    // Standard WhatsApp links (General)
+    const baseWa = `https://wa.me/${SETTINGS.whatsapp.replace(/\+/g,'')}`;
+    document.querySelectorAll('.wa-link').forEach(l => {
+      l.addEventListener('click', (e) => {
+        e.preventDefault();
+        openBookingModal("General Inquiry");
+      });
+    });
+
+    // Render Tours
+    const tGrid = document.getElementById('tours-grid');
+    SETTINGS.tours.forEach(tour => {
+        tGrid.innerHTML += `
+            <div class="tour-card reveal">
+                <div class="tour-img-container">
+                    <img src="${tour.img}" class="tour-img">
+                </div>
+                <div class="tour-card-content">
+                    <div class="tour-meta">
+                        <span class="tour-route-badge">Private Expedition</span>
+                        <span style="font-size:0.7rem; color:var(--gold); font-weight:800">${tour.badge}</span>
+                    </div>
+                    <h3 style="font-size: 1.8rem; line-height: 1.2;">${tour.name}</h3>
+                    <div class="tour-duration" style="margin-bottom: 1.5rem;">⏱ ${tour.duration}</div>
+                    ${tour.description ? `<p style="font-size:0.9rem; color:var(--text-mid); margin-bottom:1.5rem; line-height:1.6">${tour.description}</p>` : ''}
+                    
+                    ${tour.spots && tour.spots.length > 0 ? `
+                        <span class="tour-itinerary-header">Top Spots Along the Way</span>
+                        <div class="tour-spots-list" style="margin-bottom: 2rem;">
+                            ${tour.spots.map(s => `
+                                <div class="tour-spot">
+                                    <div class="tour-spot-point"></div>
+                                    <div class="tour-spot-text"><strong>${s[0]}</strong><span>${s[1]}</span></div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    ${tour.why ? `
+                        <div style="background:var(--pearl); padding:1.2rem; border-radius:var(--radius-sm); margin-bottom: 2rem;">
+                            <strong style="display:block; font-size:0.85rem; color:var(--navy); margin-bottom:0.4rem; text-transform:uppercase; letter-spacing:0.05em">Why Choose This Tour</strong>
+                            <p style="font-size:0.85rem; color:var(--text-mid); line-height:1.5; margin:0">${tour.why}</p>
+                        </div>
+                    ` : ''}
+                    <a href="javascript:void(0)" class="btn-book-tour" onclick="openBookingModal('${tour.name}')" style="margin-top:auto;">${tour.cta || 'Book This Tour'}</a>
+                </div>
+            </div>
+        `;
+    });
+
+    // Render Reviews
+    const gTrack = document.getElementById('google-carousel');
+    const tTrack = document.getElementById('tripadvisor-carousel');
+    const rLongList = [...SETTINGS.reviews, ...SETTINGS.reviews, ...SETTINGS.reviews];
+    rLongList.forEach(r => {
+        const card = `
+            <div class="rev-card">
+                <div class="rev-head">
+                    <img src="${r.img}" class="rev-avatar">
+                    <div class="rev-author">
+                        <h4>${r.a}</h4>
+                        <div style="color:var(--gold); font-size:0.8rem">★★★★★</div>
+                        <span>Verified via ${r.s}</span>
+                    </div>
+                </div>
+                <p class="rev-body">"${r.t}"</p>
+            </div>
+        `;
+        if(r.s === 'Google') gTrack.innerHTML += card;
+        else tTrack.innerHTML += card;
+    });
+
+    // Render Gallery
+    const gTrackFinal = document.getElementById('gallery-track');
+    SETTINGS.gallery.forEach(img => {
+        gTrackFinal.innerHTML += `<div class="gallery-item" onclick="openLightbox('${img}')"><img src="${img}"></div>`;
+    });
+  }
+
+  // Booking Flow
+  function openBookingModal(tourName) {
+    selectedTour = tourName;
+    document.getElementById('modal-tour-name').innerText = tourName === "General Inquiry" ? "Book Your Adventure" : tourName;
+    document.getElementById('booking-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBookingModal() {
+    document.getElementById('booking-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  function submitBooking() {
+    const name = document.getElementById('bk-name').value.trim();
+    const size = document.getElementById('bk-size').value;
+    const date = document.getElementById('bk-date').value;
+    
+    if(!name) {
+      alert("Please enter your name to proceed ⚓");
+      return;
+    }
+
+    let message = `Hello! My name is ${name}, we are a group of ${size} and I'd like to book the ${selectedTour}`;
+    if (date) {
+      message += ` for the date ${date}`;
+    }
+    message += ` with Bayamar Adventures.`;
+    
+    const waUrl = `https://wa.me/${SETTINGS.whatsapp.replace(/\+/g,'')}?text=${encodeURIComponent(message)}`;
+    
+    window.open(waUrl, '_blank');
+    closeBookingModal();
+  }
+
+  // Gallery Sliders
+  let galleryIndex = 0;
+  function slideGallery(dir) {
+    const track = document.getElementById('gallery-track');
+    const items = document.querySelectorAll('.gallery-item');
+    const itemWidth = items[0].offsetWidth + 24; // Width + gap
+    const windowWidth = document.querySelector('.gallery-window').offsetWidth;
+    const maxIndex = items.length - Math.floor(windowWidth / itemWidth);
+
+    galleryIndex = Math.max(0, Math.min(galleryIndex + dir, maxIndex));
+    track.style.transform = `translateX(-${galleryIndex * itemWidth}px)`;
+    
+    document.getElementById('prevBtn').disabled = (galleryIndex === 0);
+    document.getElementById('nextBtn').disabled = (galleryIndex >= maxIndex);
+  }
+
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+
+  // Reveal
+  const observer = new IntersectionObserver((es) => {
+    es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold: 0.1});
+
+  function slideReviews(wrapperId, dir) {
+    const wrap = document.getElementById(wrapperId);
+    const gTrack = document.getElementById('google-carousel');
+    const tTrack = document.getElementById('tripadvisor-carousel');
+    
+    // Stop BOTH carousels instantly on first user interaction
+    gTrack.classList.add('paused');
+    tTrack.classList.add('paused');
+
+    const cardWidth = 400; // card
+    const gap = 32; // 2rem
+    const distance = cardWidth + gap;
+    
+    wrap.scrollBy({ left: dir * distance, behavior: 'smooth' });
+  }
+
+  function toggleFaq(el) {
+    const i = el.parentElement;
+    const o = i.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(x => x.classList.remove('open'));
+    if(!o) i.classList.add('open');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    init();
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    window.addEventListener('resize', () => {
+        galleryIndex = 0;
+        document.getElementById('gallery-track').style.transform = 'translateX(0)';
+        document.getElementById('prevBtn').disabled = true;
+    });
+  });
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 1200); // Slightly longer for a more premium, confident pace
+  });
+</script>
+
+</body>
+</html>
