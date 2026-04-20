@@ -8,7 +8,7 @@
 <meta name="keywords" content="private boat tour Albania, Himara boat trips, Pirate's Cave boat tour, Albanian Riviera boat excursions, Bayamar Adventures Himara">
 
 <!-- Favicon -->
-<link rel="icon" type="image/jpeg" href="upclose boat logo pic.jpg">
+<link rel="icon" type="image/png" href="isopeel-transparent_upscayl_3x_upscayl-standard-4x.png">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
@@ -18,7 +18,7 @@
 <meta property="og:image" content="new hero.jpg">
 
 <!-- Theme Color for browsers -->
-<meta name="theme-color" content="#0e356e">
+<meta name="theme-color" content="#142a63">
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -28,13 +28,13 @@
     --white:#ffffff;
     --off-white:#f8f9fb;
     --pearl:#f2f5f8;
-    --blue-100:#ddeaf7;
-    --blue-200:#b8d4ef;
-    --blue-400:#5fa3d8;
-    --blue-500:#2d7fc4;
-    --blue-600:#1a5e9a;
-    --blue-800:#144a8a;
-    --navy:#0e356e;
+    --blue-100:#e0e9fa;
+    --blue-200:#a5c1f5;
+    --blue-400:#5a8cf5;
+    --blue-500:#3b6ce3;
+    --blue-600:#2a54b3;
+    --blue-800:#1c3b7a;
+    --navy:#142a63;
     --text-dark:#0f172a;
     --text-mid:#334155;
     --text-muted:#64748b;
@@ -128,7 +128,7 @@
     transition:all 0.4s ease;
   }
   .nav-logo-container{display:flex;align-items:center;gap:14px;text-decoration:none}
-  .nav-logo-img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--blue-100)}
+  .nav-logo-img{width:64px;height:auto;object-fit:contain;transition:var(--transition-apple)}
   .nav-logo-text{
     font-family:var(--font-display);
     font-size:1.7rem;font-weight:600;color:var(--navy);letter-spacing:0.01em;
@@ -182,7 +182,7 @@
   }
   .hero-overlay{
     position:absolute;inset:0;
-    background:linear-gradient(to bottom, rgba(8,33,65,0.6) 0%, rgba(8,33,65,0.85) 100%);
+    background:linear-gradient(to bottom, rgba(20, 42, 99, 0.6) 0%, rgba(20, 42, 99, 0.85) 100%);
     z-index:2;
   }
   .hero-content{position:relative;z-index:10;max-width:900px}
@@ -197,7 +197,7 @@
     box-shadow:0 10px 30px rgba(0,0,0,0.1);
     text-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.4), 0 0 20px rgba(0,0,0,0.2);
   }
-  .hero-badge i{color:var(--blue-200);font-size:1rem}
+  .hero-badge i{color:var(--blue-400);font-size:1rem}
   .hero h1{
     font-family:var(--font-display);
     font-size:clamp(3rem, 10vw, 6.5rem);
@@ -206,7 +206,7 @@
     margin-bottom:1.2rem;letter-spacing:-0.03em;
     text-shadow: 0 4px 60px rgba(0,0,0,0.4), 0 4px 15px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.4);
   }
-  .hero h1 em{font-style:italic;color:var(--blue-200);font-weight:400}
+  .hero h1 em{font-style:italic;color:var(--blue-400);font-weight:400}
   .hero-sub{
     font-size:clamp(1.1rem, 2.5vw, 1.5rem);
     color:rgba(255,255,255,0.95);max-width:680px;
@@ -350,14 +350,14 @@
   /* ── FOOTER ── */
   footer{background:var(--cream);padding:8rem 2rem;color:var(--text-dark);position:relative;border-top:1px solid var(--blue-100)}
   @media(max-width:768px){footer{padding:4rem 1.5rem}}
-  .footer-inner{max-width:1250px;margin:0 auto;display:grid;grid-template-columns:1fr 1.2fr;gap:4rem}
+  .footer-inner{max-width:1250px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4rem}
   @media(max-width:1024px){.footer-inner{grid-template-columns:1fr;gap:3rem}}
   .footer-logo{font-family:var(--font-display);font-size:2.8rem;display:block;margin-bottom:1.5rem;text-decoration:none;color:var(--navy)}
   .footer-logo span{color:inherit}
   .footer-links{display:flex;flex-direction:column;gap:1.2rem;list-style:none}
   .footer-links a{color:var(--text-mid);text-decoration:none;font-weight:600;transition:0.3s}
   .footer-links a:hover{color:var(--blue-500);transform:translateX(5px)}
-  .footer-map-container{height:420px;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-soft);border:1px solid var(--blue-100); grid-column: span 1;}
+  .footer-map-container{width:100%; max-width:800px; height:420px; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-soft); border:1px solid var(--blue-100);}
   @media(max-width:1024px){.footer-map-container{height:350px}}
   .footer-map-container iframe{width:100%;height:100%;border:0}
 
@@ -440,8 +440,8 @@
 
 <div id="loader-overlay">
   <div class="loader-content">
-    <div class="loader-logo">Bayamar <span>Adventures</span></div>
-    <p style="font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.6">Exploring the Ionian sea</p>
+    <img src="isopeel-transparent_upscayl_3x_upscayl-standard-4x.png" alt="Bayamar" style="width: 180px; height: auto; margin-bottom: 2rem; animation: float 3s ease-in-out infinite;">
+    <p style="font-size:0.85rem; letter-spacing:0.3em; text-transform:uppercase; opacity:0.8; font-weight: 700; color: var(--navy)">Exploring the Ionian sea</p>
     <div class="loader-line">
       <div class="loader-line-inner"></div>
     </div>
@@ -450,7 +450,7 @@
 
 <nav id="main-nav">
   <a href="#" class="nav-logo-container">
-    <img src="upclose boat logo pic.jpg" class="nav-logo-img" alt="Bayamar">
+    <img src="isopeel-transparent_upscayl_3x_upscayl-standard-4x.png" class="nav-logo-img" alt="Bayamar">
     <span class="nav-logo-text">Bayamar <span>Adventures</span></span>
   </a>
   <ul class="nav-links">
@@ -653,7 +653,7 @@
   </div>
 </section>
 
-<section id="ready-to-sail" class="section-padding" style="background: linear-gradient(rgba(14, 53, 110, 0.6), rgba(14, 53, 110, 0.6)), url('new hero.jpg') center/cover no-repeat; color:var(--white); text-align:center; position: relative; overflow: hidden;">
+<section id="ready-to-sail" class="section-padding" style="background: linear-gradient(rgba(20, 42, 99, 0.7), rgba(20, 42, 99, 0.7)), url('new hero.jpg') center/cover no-repeat; color:var(--white); text-align:center; position: relative; overflow: hidden;">
   <div class="container reveal">
     <h2 class="section-title" style="color:var(--white); margin-top: 2rem; font-family:var(--font-display); font-weight:300; letter-spacing:-0.02em; text-shadow: 0 4px 30px rgba(0,0,0,0.3)">Let’s explore the best of the<br><em style="color:white; font-style:italic">Albanian Riviera</em> together 🌊</h2>
     <a href="#" class="btn-primary wa-link" style="background:var(--white); color:var(--blue-500); transform:scale(1.1); font-weight: 900; margin-top: 2.5rem; text-transform: uppercase;">Book Your Tour Now maximum 6 people</a>
@@ -665,7 +665,9 @@
 <footer>
   <div class="container footer-inner">
     <div class="footer-brand">
-        <a href="#" class="footer-logo">Bayamar <span>Adventures</span></a>
+        <a href="#" class="footer-logo" style="margin: 0 auto;">
+          <img src="isopeel-transparent_upscayl_3x_upscayl-standard-4x.png" alt="Bayamar" style="width: 280px; height: auto; display: block; margin: 0 auto 2rem;">
+        </a>
         <p style="color:var(--text-mid); font-weight:400; font-size:1rem; line-height:1.8; margin-bottom: 2rem">The premier private boat boutique in Himara, Albania. Crafting exclusive maritime escapes with the legendary Bayamar Captain.</p>
         
         <h4 style="color:var(--navy); margin-bottom:1rem; font-size:1.05rem; text-transform: uppercase; letter-spacing: 0.1em">Talk to us</h4>
