@@ -290,14 +290,21 @@
   .tour-spot-text strong{color:var(--navy);display:block;margin-bottom:0.1rem}
   .tour-spot-text span{color:var(--text-mid)}
   .btn-book-tour{
-    width:100%;text-align:center;padding:1.1rem 2.2rem;
+    width:100%;text-align:center;padding:1.4rem;
+    background:var(--blue-100);color:var(--blue-600);
+    text-decoration:none;border-radius:var(--radius-md);
+    font-weight:800;font-size:0.95rem;transition:0.3s ease;margin-top:auto;
+  }
+  .btn-book-tour:hover{background:var(--blue-400);color:var(--white)}
+
+  .btn-pill-navy{
+    display:inline-block;padding:1.1rem 2.5rem;
     background:var(--navy);color:var(--white);
     text-decoration:none;border-radius:100px;
     font-weight:700;font-size:1rem;transition:var(--transition-apple);
-    display:inline-block; border:1px solid transparent;
-    cursor:pointer;
+    border:1px solid transparent;cursor:pointer;text-align:center;
   }
-  .btn-book-tour:hover{background:var(--blue-600);transform:scale(1.02);box-shadow:var(--shadow-md)}
+  .btn-pill-navy:hover{background:var(--blue-600);transform:scale(1.02);box-shadow:var(--shadow-md)}
 
   /* ── INTERACTIVE GALLERY (MANUAL SLIDER) ── */
   .gallery-section{background:var(--cream);position:relative;overflow:hidden}
