@@ -234,6 +234,16 @@
   }
   .btn-submit-booking:hover{background:var(--blue-600);transform:translateY(-3px);box-shadow:0 10px 30px rgba(14,53,110,0.25)}
 
+  .btn-book-tour{
+    width:100%;text-align:center;padding:1.1rem 2.2rem;
+    background:var(--navy);color:var(--white);
+    text-decoration:none;border-radius:100px;
+    font-weight:700;font-size:1rem;transition:var(--transition-apple);
+    display:inline-block; border:1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-book-tour:hover{background:var(--blue-600);transform:scale(1.02);box-shadow:var(--shadow-md)}
+
   .recommendation-box {
     background: var(--blue-100);
     padding: 2rem;
@@ -357,7 +367,7 @@
     </div>
 
     <div class="reveal delay-1">
-      <div class="booking-widget">
+      <div class="booking-widget" id="booking-form-area">
         <h3 class="booking-title">Book Porto Palermo</h3>
         <p class="booking-subtitle">Secure your private adventure</p>
         
@@ -422,8 +432,11 @@
           <img src="client2.jpg" class="rev-avatar-compact">
           <div class="rev-name-compact">Nimela Hoxhaj <div style="color:var(--gold); font-size:0.7rem">★★★★★</div></div>
         </div>
-        <p class="rev-text-compact">"Peaceful escape. Captain knew all best hidden spots."</p>
-      </div>
+    </div>
+    
+    <!-- CTA After Reviews -->
+    <div style="text-align: center; margin: 4rem auto 0;" class="reveal">
+      <a href="#booking-form-area" class="btn-book-tour" style="max-width: 320px; text-decoration: none;">Book This Tour ⚓</a>
     </div>
   </div>
 </section>
