@@ -518,7 +518,9 @@
   .lightbox-prev{left: 1.5rem;}
   .lightbox-next{right: 1.5rem;}
   @media(max-width: 768px){
-    .lightbox-nav{ display: none; }
+    .lightbox-nav{ width: 40px; height: 40px; font-size: 1.2rem; display: flex; }
+    .lightbox-prev{ left: 0.5rem; }
+    .lightbox-next{ right: 0.5rem; }
   }
 
   /* ── FAQ ── */
@@ -1055,11 +1057,19 @@
     }
 
     renderGalleryPage();
-    setInterval(nextGalleryPage, 4000);
+    renderGalleryPage();
+    resetGalleryTimer();
   }
 
   // Gallery Pagination
   let currentGalleryIndex = 0;
+  let galleryTimer;
+
+  function resetGalleryTimer() {
+    clearInterval(galleryTimer);
+    galleryTimer = setInterval(() => changeGalleryPage(1), 6000); // 6s for better reading
+  }
+
   function renderGalleryPage() {
     const grid = document.getElementById('guest-moments-grid');
     if (!grid) return;
@@ -1090,13 +1100,18 @@
     }, currentImgs.length > 0 ? 500 : 0);
   }
 
-  function nextGalleryPage() {
-    currentGalleryIndex = (currentGalleryIndex + 4) % SETTINGS.gallery.length;
+  function changeGalleryPage(step) {
+    const totalItems = SETTINGS.gallery.length;
+    currentGalleryIndex = (currentGalleryIndex + (step * 4) + totalItems) % totalItems;
+    
+    // Ensure we start at a multiple of 4
+    currentGalleryIndex = Math.floor(currentGalleryIndex / 4) * 4;
+    
     renderGalleryPage();
+    if (step !== 0) resetGalleryTimer();
   }
 
   function showAllPhotos() {
-    // Instead of expanding the grid, we trigger the swipeable lightbox starting from the first image
     openLightbox(SETTINGS.gallery[0]);
   }
 
