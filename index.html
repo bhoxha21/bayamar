@@ -20,7 +20,7 @@
 <!-- Theme Color for browsers -->
 <meta name="theme-color" content="#142a63">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&family=Inter:wght@300;700&family=Montserrat:wght@300;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&family=Inter:wght@100;300;700&family=Outfit:wght@100;300;700&family=Montserrat:wght@300;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
@@ -94,8 +94,20 @@
   }
 
   /* ── SCROLL REVEAL ── */
-  .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s var(--transition-apple), transform 0.8s var(--transition-apple)}
-  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal{
+    opacity:0;
+    transform:translateY(40px) scale(0.98);
+    transition: 
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.8s ease;
+    filter: blur(8px);
+  }
+  .reveal.visible{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter: blur(0);
+  }
   
   /* ── LOADER ── */
   #loader-overlay{
@@ -240,12 +252,12 @@
     transform: scale(1.15);
   }
   .slide.active{
-    opacity:0.7;
+    opacity:0.9;
     transform: scale(1); /* Ken Burns effect: subtle zoom out */
   }
   .hero-overlay{
     position:absolute;inset:0;
-    background: linear-gradient(to bottom, rgba(2, 6, 18, 0.3), rgba(2, 6, 18, 0.8));
+    background: linear-gradient(to bottom, rgba(2, 6, 18, 0.15), rgba(2, 6, 18, 0.5));
     z-index:2;
   }
   .hero-content{position:relative;z-index:10;max-width:1000px}
@@ -337,56 +349,82 @@
     color: var(--text-dark);
   }
   .tours-section h2 { color: var(--navy); }
-  .tours-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));gap:3rem;margin-top:4rem}
-  @media(max-width:500px){.tours-grid{grid-template-columns:1fr}}
+  .tours-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));gap:5rem;margin-top:4rem}
+  @media(max-width:768px){
+    .tours-section { padding: 4rem 0; }
+    .tours-section .container { width: 100%; max-width: none; padding: 0; }
+    .tours-grid{ grid-template-columns:1fr; gap: 4rem; margin-top: 2rem; }
+    .tour-card { border-radius: 0; padding: 0; background: var(--cream); }
+    .tour-img-container { border-radius: 0; height: 320px; margin-bottom: 0; }
+    .tour-card h3 { 
+      padding: 1.2rem 1.2rem 1.8rem; 
+      background: var(--white); 
+      width: 100%; 
+      font-size: 1.8rem;
+    }
+  }
   
   .tour-card{
-    background:var(--blue-100);
-    border-radius:var(--radius-xl);
-    padding: 1.5rem;
+    background:var(--white); /* Minimal white frame */
+    border-radius:28px;
+    padding: 0.5rem;
     transition:var(--transition-apple);
     display:flex;
     flex-direction:column;
     border: none;
-    box-shadow: 0 4px 15px rgba(20, 42, 99, 0.05);
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
   }
   .tour-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-md)}
   
   .tour-img-container{
-    height:300px;
-    border-radius:var(--radius-lg);
+    width: 100%;
+    height:420px;
+    border-radius:24px;
     background: var(--white);
     overflow:hidden;
     position:relative;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
+    box-shadow: var(--shadow-soft);
   }
   .tour-img{width:100%;height:100%;object-fit:cover;transition:transform 2s var(--transition-apple)}
   .tour-card:hover .tour-img{transform:scale(1.1)}
   
-  .tour-card-content{padding:0 1rem 1rem;flex-grow:1;display:flex;flex-direction:column;text-align:center;}
   .tour-card h3{
     font-family:var(--font-display);
     font-size:2rem;
     color:var(--navy);
-    margin-bottom:2rem;
-    line-height: 1.2;
-    font-weight: 400;
+    margin: 0;
+    line-height: 1.1;
+    font-weight: 300;
   }
   
-  .btn-book-tour{
-    width:100%;
-    text-align:center;
-    padding:1.1rem;
-    background:var(--white);
-    color:var(--blue-600);
-    text-decoration:none;
-    border-radius:100px;
-    font-weight:700;
-    font-size:0.95rem;
-    transition:0.3s ease;
-    margin-top:auto;
+  .btn-view-tour-overlay{
+    position: absolute;
+    bottom: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 0.65rem;
+    transition: 0.4s var(--transition-apple);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    z-index: 5;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
   }
-  .btn-book-tour:hover{background:var(--white);color:var(--navy);transform:translateY(-2px);box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
+  .btn-view-tour-overlay:hover{
+    background: rgba(255, 255, 255, 0.45);
+    transform: translateX(-50%) scale(1.05);
+  }
 
 
   .btn-pill-navy{
@@ -426,9 +464,11 @@
   /* ── REVIEWS (CONSTANT SMOOTH MOTION) ── */
   .reviews-section{background:var(--cream);overflow:hidden;padding-bottom:3rem}
   .gallery-marquee { animation: marquee 45s linear infinite; }
-  .carousel-wrapper{margin:4rem 0;position:relative;overflow-x:hidden;scroll-behavior:smooth;cursor:grab;-ms-overflow-style:none;scrollbar-width:none;scroll-snap-type:x mandatory}
+  .carousel-wrapper{margin:4rem 0;position:relative;overflow-x:auto;scroll-behavior:smooth;cursor:grab;-ms-overflow-style:none;scrollbar-width:none;}
   .carousel-wrapper:active{cursor:grabbing}
-  .carousel-track{display:flex;gap:2rem;width:max-content;}
+  .carousel-track{display:flex;gap:2rem;width:max-content;animation:marquee 50s linear infinite;padding:1rem 0}
+  .carousel-track:hover{animation-play-state:paused}
+  .carousel-track:active{animation-play-state:paused}
   .marquee-animate { animation:marquee 60s linear infinite; }
   @keyframes marquee {
     0% { transform: translateX(0); }
@@ -460,12 +500,26 @@
 
   /* ── LIGHTBOX ── */
   #lightbox{
-    position:fixed;inset:0;background:rgba(2, 11, 24, 0.95);
+    position:fixed;inset:0;background:rgba(2, 11, 24, 0.98);
     z-index:9999;display:none;align-items:center;justify-content:center;
-    padding:2rem;cursor:zoom-out;backdrop-filter:blur(10px);
+    padding:1rem;cursor:zoom-out;backdrop-filter:blur(20px);
   }
-  #lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 0 100px rgba(0,0,0,0.5)}
-  .lightbox-close{position:absolute;top:2rem;right:2rem;color:white;font-size:2.5rem;cursor:pointer}
+  #lightbox img{max-width:100%;max-height:85vh;border-radius:8px;box-shadow:0 0 80px rgba(0,0,0,0.8); transition: transform 0.3s ease;}
+  .lightbox-close{position:absolute;top:1.5rem;right:1.5rem;color:white;font-size:2rem;cursor:pointer; z-index: 10001; opacity: 0.7; transition: 0.3s;}
+  .lightbox-close:hover{opacity: 1;}
+  .lightbox-nav{
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.1); border: none; color: white;
+    width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; transition: 0.3s; z-index: 10001;
+  }
+  .lightbox-nav:hover{background: rgba(255,255,255,0.2);}
+  .lightbox-prev{left: 1.5rem;}
+  .lightbox-next{right: 1.5rem;}
+  @media(max-width: 768px){
+    .lightbox-nav{ display: none; }
+  }
 
   /* ── FAQ ── */
   .faq-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:6rem}
@@ -522,7 +576,7 @@
 
   
   .btn-view-all {
-    display: none;
+    display: inline-block;
     margin: 2rem auto 0;
     padding: 1rem 2.5rem;
     background: var(--navy);
@@ -535,11 +589,6 @@
     transition: var(--transition-apple);
     text-decoration: none;
     text-align: center;
-  }
-  @media(max-width: 768px) {
-    .btn-view-all {
-      display: inline-block;
-    }
   }
   
   .sub-footer {
@@ -736,7 +785,7 @@
       <!-- Populated via JS -->
     </div>
     <div style="text-align:center;">
-        <button onclick="nextGalleryPage()" class="btn-view-all" style="display:inline-block;">Show More Moments ⚓</button>
+        <button onclick="showAllPhotos()" class="btn-view-all">View All Photos ⚓</button>
     </div>
   </div>
 
@@ -773,9 +822,11 @@
   </div>
 </section>
 
-<div id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close">&times;</span>
+<div id="lightbox">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <button class="lightbox-nav lightbox-prev" onclick="prevLightbox(event)">&#10094;</button>
   <img src="" id="lightbox-img" alt="Enlarged moment">
+  <button class="lightbox-nav lightbox-next" onclick="nextLightbox(event)">&#10095;</button>
 </div>
 
 <div class="minimal-divider reveal"></div>
@@ -798,18 +849,18 @@
         </a>
     </div>
 
-    <div class="social-official" style="display:flex; justify-content:center; gap:4rem; margin: 0.5rem 0 1rem; align-items: flex-start;">
-      <a href="https://wa.me/355693505540" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; text-decoration:none;">
-        <img src="icons8-whatsapp-96.png" style="width: 54px; height: 54px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-        <span style="font-family:var(--font-pill); font-size:0.65rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.15em;">WhatsApp</span>
+    <div class="social-official" style="display:flex; justify-content:center; gap:2rem; margin: 0.5rem 0 1rem; align-items: flex-start; flex-wrap: nowrap;">
+      <a href="https://wa.me/355693505540" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; text-decoration:none; flex-shrink: 0;">
+        <img src="icons8-whatsapp-96.png" style="width: 48px; height: 48px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <span style="font-family:var(--font-pill); font-size:0.6rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.1em; white-space: nowrap;">WhatsApp</span>
       </a>
-      <a href="https://instagram.com/bayamar_adventures" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; text-decoration:none;">
-        <img src="icons8-instagram-94.png" style="width: 54px; height: 54px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-        <span style="font-family:var(--font-pill); font-size:0.65rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.15em;">Instagram</span>
+      <a href="https://instagram.com/bayamar_adventures" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; text-decoration:none; flex-shrink: 0;">
+        <img src="icons8-instagram-94.png" style="width: 48px; height: 48px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <span style="font-family:var(--font-pill); font-size:0.6rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.1em; white-space: nowrap;">Instagram</span>
       </a>
-      <a href="https://www.tripadvisor.com/Attraction_Review-g801295-d33248976-Reviews-Bayamar_Adventures-Himare_Vlore_County.html" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; text-decoration:none;">
-        <img src="icons8-tripadvisor-96.png" style="width: 60px; height: 60px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-        <span style="font-family:var(--font-pill); font-size:0.65rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.15em;">TripAdvisor</span>
+      <a href="https://www.tripadvisor.com/Attraction_Review-g801295-d33248976-Reviews-Bayamar_Adventures-Himare_Vlore_County.html" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; text-decoration:none; flex-shrink: 0;">
+        <img src="icons8-tripadvisor-96.png" style="width: 48px; height: 48px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <span style="font-family:var(--font-pill); font-size:0.6rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.1em; white-space: nowrap;">TripAdvisor</span>
       </a>
     </div>
 
@@ -828,9 +879,9 @@
 
 </div>
 
-<div class="sub-footer" style="flex-direction: column; gap: 0.2rem; padding: 3rem 1.5rem 1rem;">
-  <span style="font-family: var(--font-pill); font-size: 0.7rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.8;">Call Us</span>
-  <p style="color:var(--navy); font-weight: 800; font-size: 1.8rem; margin-bottom: 2rem;">+355 69 350 5540</p>
+<div class="sub-footer" style="flex-direction: column; gap: 0.1rem; padding: 3rem 1.5rem 1rem; display: flex; align-items: center; justify-content: center; background: var(--cream);">
+  <span style="font-family: var(--font-pill); font-size: 0.65rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.25em; opacity: 0.7; margin-bottom: 0.1rem;">Call Us</span>
+  <p style="color:var(--navy); font-weight: 100; font-size: 1.6rem; margin-bottom: 2rem; font-family: 'Outfit', sans-serif; letter-spacing: 0.15em; text-transform: uppercase;">+355 69 350 5540</p>
   <a href="https://ariawebdesigns.com" target="_blank" class="sub-footer-item" style="font-size: 0.65rem; opacity: 0.5; margin-top: auto; letter-spacing: 0.05em;">
     Website from ariawebdesigns.com
   </a>
@@ -892,7 +943,7 @@
           ["Monastery Cave", "Peaceful cave near ancient cliffs"],
           ["Pirate's Cave", "Legendary cave, perfect for exploring and diving"]
       ]},
-      { name: "Porto Palermo Coastline Tour ⚓", duration: "2.5 hours", img: "porto palermo.PNG", badge: "Scenic & Historic", description: "Discover one of the most scenic routes along the Albanian Riviera with this private boat tour starting from Himara Mini Dock. A perfect mix of exploration, swimming, and breathtaking coastal views.", cta: "Book This Tour", why: "Perfect for those who want a short but complete experience of the coastline, combining history, nature, and relaxation.", spots: [
+      { name: "Porto Palermo Coastline Tour", duration: "2.5 hours", img: "porto palermo.PNG", badge: "Scenic & Historic", description: "Discover one of the most scenic routes along the Albanian Riviera with this private boat tour starting from Himara Mini Dock. A perfect mix of exploration, swimming, and breathtaking coastal views.", cta: "Book This Tour", why: "Perfect for those who want a short but complete experience of the coastline, combining history, nature, and relaxation.", spots: [
           ["Filikuri Beach", "Hidden cove with crystal-clear waters and dramatic cliffs"],
           ["Llamani Beach", "Scenic pebble beach, ideal for swimming and relaxing"],
           ["Old Submarine Tunnel", "A Cold War tunnel carved into the cliffs"],
@@ -966,8 +1017,8 @@
 
     const gTrack = document.getElementById('google-carousel');
     const tTrack = document.getElementById('tripadvisor-carousel');
-    if(gTrack) gTrack.classList.add('marquee-animate');
-    if(tTrack) tTrack.classList.add('marquee-animate');
+    if(gTrack) gTrack.classList.remove('marquee-animate');
+    if(tTrack) tTrack.classList.remove('marquee-animate');
 
     SETTINGS.reviews.forEach(r => {
         const card = `
@@ -992,20 +1043,19 @@
       SETTINGS.tours.forEach((tour, index) => {
           const pages = ["grama-bay.html", "pirates-cave.html", "porto-palermo.html", "kroreza-bay.html", "sunset.html", "custom-tour.html"];
           tGrid.innerHTML += `
-              <div class="tour-card reveal">
+              <div class="tour-card reveal" style="transition-delay: ${index * 0.1}s">
                   <div class="tour-img-container">
                       <img src="${tour.img}" class="tour-img">
+                      <a href="${pages[index]}" class="btn-view-tour-overlay">View Tour</a>
                   </div>
-                  <div class="tour-card-content">
-                      <h3>${tour.name}</h3>
-                      <a href="${pages[index]}" class="btn-book-tour">View Tour</a>
-                  </div>
+                  <h3>${tour.name}</h3>
               </div>
           `;
       });
     }
 
     renderGalleryPage();
+    setInterval(nextGalleryPage, 4000);
   }
 
   // Gallery Pagination
@@ -1045,6 +1095,11 @@
     renderGalleryPage();
   }
 
+  function showAllPhotos() {
+    // Instead of expanding the grid, we trigger the swipeable lightbox starting from the first image
+    openLightbox(SETTINGS.gallery[0]);
+  }
+
 
   // Booking Flow
   function openBookingModal(tourName) {
@@ -1081,18 +1136,66 @@
     closeBookingModal();
   }
 
-  // Lightbox
+  // Lightbox Logic
+  let lightboxIndex = 0;
   function openLightbox(src) {
-    const lbImg = document.getElementById('lightbox-img');
+    lightboxIndex = SETTINGS.gallery.indexOf(src);
+    updateLightbox();
     const lb = document.getElementById('lightbox');
-    if(lbImg && lb) {
-        lbImg.src = src;
+    if(lb) {
         lb.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
     }
   }
+
+  function updateLightbox() {
+    const lbImg = document.getElementById('lightbox-img');
+    if(lbImg) {
+        lbImg.style.transform = 'scale(0.95)';
+        lbImg.style.opacity = '0';
+        setTimeout(() => {
+            lbImg.src = SETTINGS.gallery[lightboxIndex];
+            lbImg.style.transform = 'scale(1)';
+            lbImg.style.opacity = '1';
+        }, 150);
+    }
+  }
+
+  function nextLightbox(e) {
+    if(e) e.stopPropagation();
+    lightboxIndex = (lightboxIndex + 1) % SETTINGS.gallery.length;
+    updateLightbox();
+  }
+
+  function prevLightbox(e) {
+    if(e) e.stopPropagation();
+    lightboxIndex = (lightboxIndex - 1 + SETTINGS.gallery.length) % SETTINGS.gallery.length;
+    updateLightbox();
+  }
+
   function closeLightbox() {
     const lb = document.getElementById('lightbox');
-    if(lb) lb.style.display = 'none';
+    if(lb) {
+        lb.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+  }
+
+  // Swipe support for Lightbox
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const lb = document.getElementById('lightbox');
+  if(lb) {
+    lb.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+    lb.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) nextLightbox();
+      if (touchEndX - touchStartX > 50) prevLightbox();
+    });
+    // Close on background click
+    lb.addEventListener('click', (e) => {
+        if(e.target === lb) closeLightbox();
+    });
   }
 
   // Reveal

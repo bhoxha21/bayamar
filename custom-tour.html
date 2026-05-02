@@ -12,7 +12,7 @@
 <!-- Theme Color for browsers -->
 <meta name="theme-color" content="#142a63">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&family=Outfit:wght@100;300;700&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
@@ -54,7 +54,7 @@
   }
 
   /* ── SCROLL REVEAL ── */
-  .reveal{opacity:0;transform:translateY(15px);transition:opacity 0.4s var(--transition-apple), transform 0.4s var(--transition-apple)}
+  .reveal{opacity:0;transform:translateY(15px);transition:opacity 0.5s var(--transition-apple), transform 0.5s var(--transition-apple)}
   .reveal.visible{opacity:1;transform:translateY(0)}
   
   /* ── LOADER ── */
@@ -114,7 +114,7 @@
 
   /* ── HERO ── */
   .hero{
-    height:45vh;
+    height:60vh;
     display:flex;align-items:center;justify-content:center;
     text-align:center;padding:0 1.5rem;
     position:relative;overflow:hidden;
@@ -123,12 +123,12 @@
   .hero-img-bg{
     position:absolute;inset:0;
     background:url('tour d.jpg') center/cover no-repeat;
-    opacity:0.75;
+    opacity:0.9;
     z-index:1;
   }
   .hero-overlay{
     position:absolute;inset:0;
-    background:linear-gradient(to bottom, rgba(20, 42, 99, 0.5) 0%, rgba(20, 42, 99, 0.8) 100%);
+    background:linear-gradient(to bottom, rgba(20, 42, 99, 0.1) 0%, rgba(20, 42, 99, 0.4) 100%);
     z-index:2;
   }
   .hero-content{position:relative;z-index:10;max-width:900px; padding-top: 84px;}
@@ -423,6 +423,26 @@
 
     <div class="minimal-divider reveal"></div>
 
+    <section class="section-padding" style="padding: 0 1.5rem 3rem; background: var(--cream);">
+      <div class="container">
+        <div style="text-align:center; margin-bottom: 2rem;">
+            <span class="label" style="color: var(--blue-400); font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.8rem; display: block; margin-bottom: 0.5rem;">Guest Moments</span>
+            <h2 class="detail-title" style="font-family: var(--font-heading); font-size: 2.2rem; color: var(--navy);">Shared Memories</h2>
+        </div>
+        <div class="guest-moments-track">
+          <img src="client1.jpg" alt="Guest" class="guest-moments-img reveal">
+          <img src="client2.jpg" alt="Guest" class="guest-moments-img reveal delay-1">
+          <img src="client3.jpg" alt="Guest" class="guest-moments-img reveal delay-2">
+          <img src="client4.jpg" alt="Guest" class="guest-moments-img reveal delay-3">
+        </div>
+        <div style="text-align:center; margin-top: 1.5rem;">
+            <a href="https://instagram.com/bayamar_adventures" target="_blank" class="btn-view-all" style="display: inline-block; padding: 0.8rem 2rem; font-size: 0.85rem;">View All Moments ⚓</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="minimal-divider reveal" style="margin-top: 0;"></div>
+
     <div class="details-grid">
       <div class="reveal">
         <div class="detail-block">
@@ -462,23 +482,7 @@
 
 <div class="minimal-divider reveal"></div>
 
-<section class="section-padding" style="padding: 4rem 1.5rem; background: var(--cream);">
-  <div class="container">
-    <div style="text-align:center; margin-bottom: 3rem;">
-        <span class="label">Guest Moments</span>
-        <h2 class="detail-title" style="font-size: 2.2rem;">Shared Memories</h2>
-    </div>
-    <div class="guest-moments-track">
-      <img src="client1.jpg" alt="Guest" class="guest-moments-img reveal">
-      <img src="client2.jpg" alt="Guest" class="guest-moments-img reveal delay-1">
-      <img src="client3.jpg" alt="Guest" class="guest-moments-img reveal delay-2">
-      <img src="client4.jpg" alt="Guest" class="guest-moments-img reveal delay-3">
-    </div>
-    <div style="text-align:center;">
-        <a href="https://instagram.com/bayamar_adventures" target="_blank" class="btn-view-all">View All Moments ⚓</a>
-    </div>
-  </div>
-</section>
+
 
 <section class="reviews-compact-section">
   <div class="container">
@@ -512,18 +516,18 @@
         </a>
     </div>
 
-    <div class="social-official" style="display:flex; justify-content:center; gap:4rem; margin: 0.5rem 0 1rem; align-items: flex-start;">
-      <a href="https://wa.me/355693505540" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; text-decoration:none;">
-        <img src="icons8-whatsapp-96.png" style="width: 54px; height: 54px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-        <span style="font-family:var(--font-pill); font-size:0.65rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.15em;">WhatsApp</span>
+    <div class="social-official" style="display:flex; justify-content:center; gap:2rem; margin: 0.5rem 0 1rem; align-items: flex-start; flex-wrap: nowrap;">
+      <a href="https://wa.me/355693505540" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; text-decoration:none; flex-shrink: 0;">
+        <img src="icons8-whatsapp-96.png" style="width: 48px; height: 48px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <span style="font-family:var(--font-pill); font-size:0.6rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.1em; white-space: nowrap;">WhatsApp</span>
       </a>
-      <a href="https://instagram.com/bayamar_adventures" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; text-decoration:none;">
-        <img src="icons8-instagram-94.png" style="width: 54px; height: 54px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-        <span style="font-family:var(--font-pill); font-size:0.65rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.15em;">Instagram</span>
+      <a href="https://instagram.com/bayamar_adventures" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; text-decoration:none; flex-shrink: 0;">
+        <img src="icons8-instagram-94.png" style="width: 48px; height: 48px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <span style="font-family:var(--font-pill); font-size:0.6rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.1em; white-space: nowrap;">Instagram</span>
       </a>
-      <a href="https://www.tripadvisor.com/Attraction_Review-g801295-d33248976-Reviews-Bayamar_Adventures-Himare_Vlore_County.html" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; text-decoration:none;">
-        <img src="icons8-tripadvisor-96.png" style="width: 60px; height: 60px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-        <span style="font-family:var(--font-pill); font-size:0.65rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.15em;">TripAdvisor</span>
+      <a href="https://www.tripadvisor.com/Attraction_Review-g801295-d33248976-Reviews-Bayamar_Adventures-Himare_Vlore_County.html" target="_blank" style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; text-decoration:none; flex-shrink: 0;">
+        <img src="icons8-tripadvisor-96.png" style="width: 48px; height: 48px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+        <span style="font-family:var(--font-pill); font-size:0.6rem; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:0.1em; white-space: nowrap;">TripAdvisor</span>
       </a>
     </div>
 
@@ -537,9 +541,9 @@
   </div>
 </footer>
 
-<div class="sub-footer">
-  <span style="font-family: var(--font-pill); font-size: 0.7rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.8; margin-bottom: 0.2rem;">Call Us</span>
-  <p style="color:var(--navy); font-weight: 800; font-size: 1.8rem; margin-bottom: 2rem;">+355 69 350 5540</p>
+<div class="sub-footer" style="flex-direction: column; gap: 0.1rem; padding: 3rem 1.5rem 1rem; display: flex; align-items: center; justify-content: center; background: var(--cream);">
+  <span style="font-family: var(--font-pill); font-size: 0.65rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.25em; opacity: 0.7; margin-bottom: 0.1rem;">Call Us</span>
+  <p style="color:var(--navy); font-weight: 100; font-size: 1.6rem; margin-bottom: 2rem; font-family: 'Outfit', sans-serif; letter-spacing: 0.15em; text-transform: uppercase;">+355 69 350 5540</p>
   <a href="https://ariawebdesigns.com" target="_blank" class="sub-footer-item" style="font-size: 0.65rem; opacity: 0.5; margin-top: auto; letter-spacing: 0.05em;">
     Website from ariawebdesigns.com
   </a>
