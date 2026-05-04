@@ -20,7 +20,7 @@
 <!-- Theme Color for browsers -->
 <meta name="theme-color" content="#142a63">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&family=Inter:wght@100;300;700&family=Outfit:wght@100;300;700&family=Montserrat:wght@300;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;700&family=Inter:wght@100;300;700&family=Outfit:wght@100;300;700;900&family=Montserrat:wght@300;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700&family=Syne:wght@800&family=Italiana&display=swap" rel="stylesheet">
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
@@ -191,7 +191,7 @@
   }
   .nav-links a{
     font-family: var(--font-pill);
-    font-size:0.75rem;font-weight:700;letter-spacing:0.2em;
+    font-size:0.65rem;font-weight:700;letter-spacing:0.15em;
     text-transform:uppercase;color:var(--white);text-decoration:none;transition:all 0.3s;
     opacity: 0.8;
   }
@@ -364,10 +364,17 @@
     }
   }
   
+  .tour-card-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+  }
+
   .tour-card{
-    background:var(--white); /* Minimal white frame */
+    background:var(--white); 
     border-radius:28px;
-    padding: 0.5rem;
+    padding: 0;
     transition:var(--transition-apple);
     display:flex;
     flex-direction:column;
@@ -375,18 +382,19 @@
     align-items: center;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    overflow: hidden;
   }
   .tour-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-md)}
   
   .tour-img-container{
     width: 100%;
     height:420px;
-    border-radius:24px;
+    border-radius:0;
     background: var(--white);
     overflow:hidden;
     position:relative;
     margin-bottom: 1.2rem;
-    box-shadow: var(--shadow-soft);
+    box-shadow: none;
   }
   .tour-img{width:100%;height:100%;object-fit:cover;transition:transform 2s var(--transition-apple)}
   .tour-card:hover .tour-img{transform:scale(1.1)}
@@ -552,8 +560,10 @@
   .guest-moments-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    padding: 1rem 0 2rem;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+    max-width: 1700px;
+    margin: 0 auto;
   }
   .guest-moments-img {
     width: 100%;
@@ -571,7 +581,9 @@
   @media(max-width: 768px) {
     .guest-moments-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      gap: 0.4rem;
+      width: calc(100% + 1rem);
+      margin-left: -0.5rem;
     }
   }
 
@@ -883,7 +895,7 @@
 
 <div class="sub-footer" style="flex-direction: column; gap: 0.1rem; padding: 3rem 1.5rem 1rem; display: flex; align-items: center; justify-content: center; background: var(--cream);">
   <span style="font-family: var(--font-pill); font-size: 0.65rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.25em; opacity: 0.7; margin-bottom: 0.1rem;">Call Us</span>
-  <p style="color:var(--navy); font-weight: 100; font-size: 1.6rem; margin-bottom: 2rem; font-family: 'Outfit', sans-serif; letter-spacing: 0.15em; text-transform: uppercase;">+355 69 350 5540</p>
+  <p style="color:var(--navy); font-weight: 700; font-size: 1.8rem; margin-bottom: 2rem; font-family: 'Montserrat', sans-serif; letter-spacing: 0.1em; text-transform: uppercase;">+355 69 350 5540</p>
   <a href="https://ariawebdesigns.com" target="_blank" class="sub-footer-item" style="font-size: 0.65rem; opacity: 0.5; margin-top: auto; letter-spacing: 0.05em;">
     Website from ariawebdesigns.com
   </a>
@@ -974,13 +986,25 @@
     ],
     reviews: [
       { a: "Agon Bytyqi", t: "Wonderful cleanliness, perfect guide. Best in Himare!", s: "Google", img: "client1.jpg" },
-      { a: "Nimela Hoxhaj", t: "Peaceful escape. Captain knew all best hidden spots.", s: "Google", img: "client2.jpg" },
-      { a: "Ermal Allko", t: "Professional, friendly crew, stunning spots. Safe and comfortable.", s: "Google", img: "client3.jpg" },
-      { a: "Maria Alt", t: "Wonderful private tour to Grama Bay. Highly recommended.", s: "Google", img: "client4.jpg" },
-      { a: "Xhoi Topi", t: "Pure magic. Aquarium Bay stole the show. Calm and beautiful.", s: "Google", img: "client10.jpg" },
-      { a: "Juliana S", t: "Best tour for 6 hours. Daniel was kind and funny.", s: "TripAdvisor", img: "client6.jpg" },
-      { a: "Axelle R", t: "Breathtaking landscapes. Daniel took great care of us.", s: "TripAdvisor", img: "client7.jpg" },
-      { a: "Linds M", t: "Excellent skipper, tailored trip to our wants. Highly recommend!", s: "TripAdvisor", img: "client8.jpg" }
+      { a: "Nimela Hoxhaj", t: "Such a peaceful and personal experience! The captain was friendly and knew all the best hidden spots.", s: "Google", img: "client2.jpg" },
+      { a: "Ermal Allko", t: "Professional, friendly crew, stunning spots. The boat was clean, comfortable, and safe.", s: "Google", img: "client3.jpg" },
+      { a: "Maria Alt", t: "Wonderful private boat tour with Bayamar. Me and my friends really enjoyed everything. Highly recommended.", s: "Google", img: "client4.jpg" },
+      { a: "Dashamir Duraj", t: "Incredible Sunset Boat Trip with Bayamar Adventures! We had an unforgettable evening.", s: "Google", img: "client5.jpg" },
+      { a: "Bez Boys", t: "Incredible day out on the water! The crew was professional, friendly, and full of local knowledge.", s: "Google", img: "client6.jpg" },
+      { a: "meg m", t: "Stunning Pirates Cave and views. The team was super friendly and made the whole trip so fun and relaxed.", s: "Google", img: "client7.jpg" },
+      { a: "Patricia Los", t: "Amazing boat tour with Captain Daniel! He was super friendly, knowledgeable, and took us to hidden spots.", s: "Google", img: "client8.jpg" },
+      { a: "Xhoi Topi", t: "Sailing with Bayamar was pure magic. Aquarium Bay stole the show, crystal-clear waters and peaceful.", s: "Google", img: "client9.jpg" },
+      { a: "Carolina", t: "Such a blast, speeding over crystal-clear water and exploring hidden caves. A must-do for summer fun!", s: "Google", img: "client10.jpg" },
+      { a: "Axelle R", t: "Wonderful experience! Breathtaking landscapes, Daniel took great care of us and guided us perfectly.", s: "TripAdvisor", img: "client11.jpg" },
+      { a: "Linds M", t: "Great tour! Daniel was a perfect guide! We would recommend the tour to anyone!", s: "TripAdvisor", img: "client12.jpg" },
+      { a: "Hermina M", t: "Super fun experience with a great skipper named Daniel! The trip was tailored to our wants.", s: "TripAdvisor", img: "client1.jpg" },
+      { a: "Maddy T", t: "A gorgeous boat trip! Daniel was an amazing guide: warm, easygoing, and completely tuned in to what we liked.", s: "TripAdvisor", img: "client2.jpg" },
+      { a: "Juliana S", t: "The best boat tour in Himare! Daniel, our captain, was very kind, funny and always eager to help.", s: "TripAdvisor", img: "client3.jpg" },
+      { a: "Amanda R", t: "10/10 with Daniel! So friendly and fun. Took us to all the best spots.", s: "TripAdvisor", img: "client4.jpg" },
+      { a: "Karolis V", t: "Fun private trip with Daniel. He was very friendly and he told us stories about the places we visited.", s: "TripAdvisor", img: "client5.jpg" },
+      { a: "Sonia", t: "Highly recommended activity. We were able to visit caves and beaches not accessible on foot. Daniel is a great professional.", s: "TripAdvisor", img: "client6.jpg" },
+      { a: "Billy", t: "Caves and beaches with a highly skilled and knowledgeable guide. Daniel is an extremely skilled captain.", s: "TripAdvisor", img: "client7.jpg" },
+      { a: "Calvin B", t: "Amazing day out! Swimming spots and caves are amazing. Daniel was a great driver and very helpful.", s: "TripAdvisor", img: "client8.jpg" }
     ],
     gallery: ["client12.jpg", "client11.jpg", "client8.jpg", "client7.jpg", "client1.jpg", "client2.jpg", "client3.jpg", "client4.jpg", "client5.jpg", "client6.jpg", "client9.jpg", "client10.jpg"]
   };
@@ -1045,18 +1069,19 @@
       SETTINGS.tours.forEach((tour, index) => {
           const pages = ["grama-bay.html", "pirates-cave.html", "porto-palermo.html", "kroreza-bay.html", "sunset.html", "custom-tour.html"];
           tGrid.innerHTML += `
-              <div class="tour-card reveal" style="transition-delay: ${index * 0.1}s">
-                  <div class="tour-img-container">
-                      <img src="${tour.img}" class="tour-img">
-                      <a href="${pages[index]}" class="btn-view-tour-overlay">View Tour</a>
-                  </div>
-                  <h3>${tour.name}</h3>
-              </div>
+              <a href="${pages[index]}" class="tour-card-link reveal" style="transition-delay: ${index * 0.1}s; text-decoration: none;">
+                <div class="tour-card">
+                    <div class="tour-img-container">
+                        <img src="${tour.img}" class="tour-img">
+                        <span class="btn-view-tour-overlay">View Tour</span>
+                    </div>
+                    <h3>${tour.name}</h3>
+                </div>
+              </a>
           `;
       });
     }
 
-    renderGalleryPage();
     renderGalleryPage();
     resetGalleryTimer();
   }
@@ -1080,7 +1105,8 @@
 
     setTimeout(() => {
         grid.innerHTML = '';
-        const itemsToShow = SETTINGS.gallery.slice(currentGalleryIndex, currentGalleryIndex + 4);
+        const itemsPerRow = 4;
+        const itemsToShow = SETTINGS.gallery.slice(currentGalleryIndex, currentGalleryIndex + itemsPerRow);
         
         itemsToShow.forEach((img, index) => {
             const imgEl = document.createElement('img');
@@ -1102,10 +1128,11 @@
 
   function changeGalleryPage(step) {
     const totalItems = SETTINGS.gallery.length;
-    currentGalleryIndex = (currentGalleryIndex + (step * 4) + totalItems) % totalItems;
+    const itemsPerRow = 4;
+    currentGalleryIndex = (currentGalleryIndex + (step * itemsPerRow) + totalItems) % totalItems;
     
-    // Ensure we start at a multiple of 4
-    currentGalleryIndex = Math.floor(currentGalleryIndex / 4) * 4;
+    // Ensure we start at a multiple of itemsPerRow
+    currentGalleryIndex = Math.floor(currentGalleryIndex / itemsPerRow) * itemsPerRow;
     
     renderGalleryPage();
     if (step !== 0) resetGalleryTimer();
@@ -1117,6 +1144,16 @@
 
 
   // Booking Flow
+  // Scroll Reveal
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+  window.observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
   function openBookingModal(tourName) {
     selectedTour = tourName;
     document.getElementById('modal-tour-name').innerText = tourName === "General Inquiry" ? "Book Your Adventure" : tourName;
@@ -1244,13 +1281,13 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     init();
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => window.observer.observe(el));
   });
 
   window.addEventListener('load', () => {
     setTimeout(() => {
         document.body.classList.add('loaded');
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => window.observer.observe(el));
     }, 400); 
   });
 
